@@ -4,6 +4,7 @@ import {
   StyleSheet,
   FlatList,
 } from 'react-native';
+import ActionButton from 'react-native-action-button';
 
 import EventCard from './EventCard';
 
@@ -39,9 +40,13 @@ class EventList extends Component {
     this.setState({ events });
   }
 
+  // Method to handle navigation from EventList to EventForm
+  handleAddEvent = () => {
+    this.props.navigation.navigate('form')
+  }
 
   render() {
-    return (
+    return [
       // The FlatList should pass the event data to the child component EventCard
       <FlatList
         key="flatlist"
@@ -53,8 +58,13 @@ class EventList extends Component {
             event={item}
           />
         )}
-      />
-    );
+      />,
+      <ActionButton
+        key="fab"
+        buttonColor="rgba(231,76,60,1)"
+        onPress={this.handleAddEvent}
+      />,
+    ];
   }
 }
 
